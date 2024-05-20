@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "moduleResolution": "node"
+      "moduleResolution": "node"
     },
-    "include": ["src"]
+    "include": ["src", "../backend/src/data.js"]
 }
