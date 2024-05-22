@@ -15,7 +15,7 @@ export default function CartProvider({ children }) {
   const [totalCount, setTotalCount] = useState(initCart.totalCount);
 
   function getCartFromLocalStorage() {
-    const storedCart = localStorage.getItem("CART_KEY");
+    const storedCart = localStorage.getItem(CART_KEY);
     return storedCart ? JSON.parse(storedCart) : EMPTY_CART;
   }
 

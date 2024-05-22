@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import handler from "express-async-handler";
 import { UserModel } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-import { emit } from "nodemon";
 const PASSWORD_HASH_SALT_ROUNDS = 10;
 
 const router = Router();

@@ -1,0 +1,22 @@
+.table {
+    width: 100%;
+    border: 1px solid #eeeeee;
+    margin-top: 1rem;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+}
+
+.table td {
+    height: 3rem;
+}
+
+.table td img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100rem;
+    object-fit: cover;
+}
+
+.table a:hover {
+    opacity: 0.9;
+}
