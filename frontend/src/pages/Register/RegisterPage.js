@@ -16,7 +16,7 @@ export default function RegisterPage() {
   } = useForm();
 
   const navigate = useNavigate();
-  const { user, login } = useAuth();
+  const { user } = useAuth();
   const [params] = useSearchParams();
   const returnUrl = params.get("returnUrl");
   const auth = useAuth();
