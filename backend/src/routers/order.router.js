@@ -27,4 +27,35 @@ router.post(
   })
 );
 
+router.put(
+  "/pay",
+  handler(async (req, res) => {
+    const { paymentId } = req.body;
+    const order = await getNewOrderForCurrentUser(req);
+    if (!order) {
+      res.status(BAD_REQUEST).send("Order Not Found!");
+      return;
+    }
+
+    order.paymentId = paymentId;
+    order.status = OrderStatus.PAYED;
+    await order.save();
+
+    res.send(order._id);
+  })
+);
+
+//api to get the latest order of the currently logged in user
+router.get(
+  "/newOrderForCurrentUser",
+  handler(async (req, res) => {
+    const order = await OrderModel.findOne({
+      user: req.user.id,
+      status: OrderStatus.NEW,
+    });
+
+    if (order) res.send(order);
+    else res.send(BAD_REQUEST).send();
+  })
+);
 export default router;
