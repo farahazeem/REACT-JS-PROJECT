@@ -17,6 +17,16 @@ export const register = async (registerData) => {
   return data;
 };
 
+export const updateProfile = async (user) => {
+  const { data } = await axios.put("/api/users/updateProfile", user);
+  localStorage.setItem("user", JSON.stringify(data));
+  return data;
+};
+
+export const changePassword = async (passwords) => {
+  await axios.put("/api/users/changePassword", passwords);
+};
+
 export const logout = () => {
   localStorage.removeItem("user");
 };
