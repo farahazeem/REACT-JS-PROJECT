@@ -10,10 +10,11 @@ set("strictQuery", true); // Ensures all data going to the database strictly fol
 
 export const dbconnect = async () => {
   try {
-    await connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    // await connect(process.env.MONGO_URI, {
+    //   useNewUrlParser: true,
+    //   useUnifiedTopology: true,
+    // });
+    await connect(process.env.MONGO_URI); //removed the deprecated options
     await seedUsers(); // After connecting to the database, we're seeding the users
     await seedFoods();
     console.log("Connected successfully---");
