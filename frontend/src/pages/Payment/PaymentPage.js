@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./paymentPage.module.css";
-import { getOrderForCurrentUser } from "../../services/orderService";
+import { getNewOrderForCurrentUser } from "../../services/orderService";
 import Title from "../../components/Title/Title";
 import OrderItemsList from "../../components/OrderItemsList/OrderItemsList";
 import Map from "../../components/Map/Map";
@@ -9,8 +9,14 @@ import PaypalButtons from "../../components/PaypalButtons/PaypalButtons";
 export default function PaymentPage() {
   const [order, setOrder] = useState();
   useEffect(() => {
-    getOrderForCurrentUser().then((data) => setOrder(data));
-  });
+    getNewOrderForCurrentUser()
+      .then((data) => {
+        setOrder(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching order:", error);
+      });
+  }, []);
 
   if (!order) return; //it will simply not return any of the below html if order not found
 

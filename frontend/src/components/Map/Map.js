@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import "leaflet/dist/leaflet.css";
 import * as L from "leaflet";
 
-export default function Map({ readOnly, location, onChange }) {
+export default function Map({ readOnly, location, onChange = () => {} }) {
   return (
     <div className={classes.container}>
       {/* map container and tileLayer from leaflet together makes the whole map */}
