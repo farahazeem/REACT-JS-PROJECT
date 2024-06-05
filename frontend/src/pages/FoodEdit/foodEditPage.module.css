@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10rem;
+}
+
+.content 
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 25rem;
+    width: 100%;
+}
+
+.content 
+img {
+    height: 15rem;
+    border-radius: 1rem;
+    margin: 0.2rem 0 0.5rem 0
+}

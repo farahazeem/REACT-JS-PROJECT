@@ -1,6 +1,4 @@
 //we need this middleware to limit the access of the orderRouter(i.e. order.router.js) only to the authenticated users
-
-//import { verify } from "jsonwebtoken";
 import pkg from "jsonwebtoken";
 import { UNAUTHORIZED } from "../constants/httpStatus.js";
 const { verify } = pkg;

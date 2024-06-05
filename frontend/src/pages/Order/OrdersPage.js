@@ -46,7 +46,7 @@ export default function OrderPage() {
             <Link
               key={state}
               to={`/orders/${state}`}
-              className={state == filter ? classes.selected : ""}
+              className={state === filter ? classes.selected : ""}
             >
               {state}
             </Link>
