@@ -46,6 +46,7 @@ export default function FoodEditPage() {
     toast.success(`Food "${newFood.name} has been added successfully"`);
     navigate("/admin/editFood/" + newFood.id, { replace: true });
   };
+
   const upload = async (event) => {
     setImageUrl(null);
     const imageUrl = await uploadImage(event);

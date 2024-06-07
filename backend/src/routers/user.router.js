@@ -5,9 +5,46 @@ import handler from "express-async-handler";
 import { UserModel } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import auth from "../middleware/auth.mid.js";
+import admin from "../middleware/admin.mid.js";
 const PASSWORD_HASH_SALT_ROUNDS = 10;
 
 const router = Router();
+
+router.get(
+  "/",
+  admin,
+  handler(async (req, res) => {
+    const users = await UserModel.find({});
+    res.send(users);
+  })
+);
+
+router.get(
+  "/getById/:userId",
+  admin,
+  handler(async (req, res) => {
+    const { userId } = req.params;
+    const user = await UserModel.findById(userId, { password: 0 });
+    //{ password: 0 } will stop sending the password to the client
+    res.send(user);
+  })
+);
+
+router.put(
+  "/update",
+  admin,
+  handler(async (req, res) => {
+    const { id, name, email, address, isAdmin } = req.body;
+    await UserModel.findByIdAndUpdate(id, {
+      name,
+      email,
+      address,
+      isAdmin,
+    });
+
+    res.send();
+  })
+);
 
 router.post(
   "/login",
@@ -92,6 +129,27 @@ router.put(
     user.password = await bcrypt.hash(newPassword, PASSWORD_HASH_SALT_ROUNDS);
     await user.save();
     res.send();
+  })
+);
+
+router.put(
+  "/toggleBlock/:userId",
+  admin,
+  handler(async (req, res) => {
+    const { userId } = req.params;
+
+    if (userId === req.user.id) {
+      res.status(BAD_REQUEST).send("Can't block yourself");
+      return;
+    }
+
+    const user = await UserModel.findByIdAndUpdate(
+      req.user.id,
+      { isBlocked: !req.user.isBlocked },
+      { new: true } //by adding this it returns the updated document
+    );
+
+    res.send(user.isBlocked);
   })
 );
 

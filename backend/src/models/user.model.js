@@ -6,6 +6,7 @@ export const UserSchema = new Schema(
     password: { type: String, required: true },
     address: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
+    isBlocked: { type: Boolean, default: false },
   },
   {
     timestamps: true, //by adding this createdAt and UpdatedAt fields will be automatically added to every new user we added

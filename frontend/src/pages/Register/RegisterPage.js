@@ -6,6 +6,7 @@ import { useAuth } from "../../hooks/useAuth";
 import Title from "../../components/Title/Title";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
+import { EMAIL } from "../../constants/patterns";
 
 export default function RegisterPage() {
   const {
@@ -49,10 +50,7 @@ export default function RegisterPage() {
             label="Email"
             {...register("email", {
               required: true,
-              pattern: {
-                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,63}$/i,
-                message: "Email Is Not Valid",
-              },
+              pattern: EMAIL,
             })}
             error={errors.email}
           />
