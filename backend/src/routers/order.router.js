@@ -5,6 +5,7 @@ import { OrderModel } from "../models/order.model.js";
 import { OrderStatus } from "../constants/orderStatus.js";
 import auth from "../middleware/auth.mid.js";
 import { UserModel } from "../models/user.model.js";
+import { sendEmailReceipt } from "../helpers/mail.helper.js";
 
 const router = Router();
 router.use(auth);
@@ -42,6 +43,8 @@ router.put(
     order.status = OrderStatus.PAYED;
     await order.save();
 
+    //send email
+    sendEmailReceipt(order);
     res.send(order._id);
   })
 );
@@ -107,6 +110,6 @@ const getNewOrderForCurrentUser = async (req) =>
   await OrderModel.findOne({
     user: req.user.id,
     status: OrderStatus.NEW,
-  }).populate("user");
+  }).populate("user"); // since order using user, need to populate it before proceeding
 
 export default router;
