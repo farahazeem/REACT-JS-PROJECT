@@ -10,7 +10,14 @@ export default function Header() {
 
   return (
     <header className={classes.header}>
-      <div className={classes.container}>
+      <div className="flex justify-between mx-auto my-0">
+        {/* transformed the container class to tailwind css
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+        } */}
         <Link to={"/"} className={classes.logo}>
           Food Mine!
         </Link>
