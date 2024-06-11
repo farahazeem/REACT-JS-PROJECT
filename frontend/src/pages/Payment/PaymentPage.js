@@ -39,7 +39,7 @@ export default function PaymentPage() {
         </div>
         <div className={classes.map}>
           <Title title="Your Location" fontSize="1.6rem" />
-          <Map readonly={true} location={order.addressLatLng} />
+          <Map readOnly={true} location={order.addressLatLng} />
         </div>
 
         <div className={classes.buttons_container}>

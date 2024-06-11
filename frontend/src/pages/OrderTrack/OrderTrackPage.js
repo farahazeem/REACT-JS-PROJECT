@@ -52,7 +52,7 @@ export default function OrderTrackPage() {
         </div>
         <div className={classes.map}>
           <Title title="Shipping Address" fontSize="1.6rem" />
-          <Map readonly={true} location={order.addressLatLng} />
+          <Map readOnly={true} location={order.addressLatLng} />
         </div>
 
         {/* show this div if for some reason the order.status is still 'NEW' */}
