@@ -10,7 +10,7 @@ export default function Loading() {
     <div className={classes.container}>
       <div className={classes.items}>
         <img src="/loading.svg" alt="Loading!" />
-        <h1>loading...</h1>
+        <h1 className="flex justify-center">loading...</h1>
       </div>
     </div>
   );

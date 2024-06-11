@@ -1,26 +1,29 @@
 .container {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: #ffffffea;
     z-index: 10000;
-    top: 0;
-    left: 0
-}
-
-.items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .items {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80%;
-    width: 100%;
-}
-
-.items img {
+  }
+  
+  .container img {
     border-bottom: 10px solid brown;
-}
-
-.items h1 {
+  }
+  
+  .container h1 {
     color: brown;
-}
+    margin-top: 1rem;
+  }
+  
