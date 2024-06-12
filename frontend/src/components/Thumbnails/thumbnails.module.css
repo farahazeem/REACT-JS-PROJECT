@@ -16,7 +16,7 @@
     flex-direction: column;
     margin: 0.5rem;
     overflow: hidden;
-    color: #e72929;
+    color: var(--primary-red);
 }
 
 .image {

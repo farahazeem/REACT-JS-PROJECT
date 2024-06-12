@@ -1,7 +1,7 @@
 .header {
     background: white;
     padding: 0;
-    border-bottom: 1px solid #e72929;
+    border-bottom: 1px solid var(--primary-red);
 }
 
 .header a {
@@ -9,7 +9,7 @@
 }
 
 .header a:hover {
-    background-color: #e72929;
+    background-color: var(--primary-red);
     cursor: pointer;
     color: white;
 }
@@ -58,7 +58,7 @@
 }
 
 .cart_count {
-    background-color: #e72929;
+    background-color: var(--primary-red);
     color: white;
     border-radius: 100rem;
     padding: 0.1rem 0.45rem;
