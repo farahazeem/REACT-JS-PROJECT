@@ -7,10 +7,14 @@ import Title from "../../components/Title/Title";
 import Search from "../../components/Search/Search";
 import Price from "../../components/Price/Price";
 import { toast } from "react-toastify";
+import { Dialog } from "primereact/dialog";
+import StarRating from "../../components/StarRating/StarRating";
 
 export default function FoodsAdminPage() {
   const [foods, setFoods] = useState([]);
   const { searchTerm } = useSearchParams();
+  const [visible, setVisible] = useState(false);
+  const [selectedFood, setSelectedFood] = useState(null);
 
   useEffect(() => {
     loadFoods();
@@ -41,33 +45,64 @@ export default function FoodsAdminPage() {
     setFoods(foods.filter((item) => item.id !== food.id));
   };
 
+  const handleFoodView = async (food) => {
+    setSelectedFood(food);
+    setVisible(true);
+  };
+
   return (
-    <div className={classes.container}>
-      <div className={classes.list}>
-        <Title title="Manage Foods" margin="1rem auto" />
-        <Search
-          searchRoute="/admin/foods/"
-          defaultRoute="/admin/foods"
-          margin="1rem 0"
-          placeholder="Search Foods"
-        />
-        <Link to="/admin/addFood" className={classes.add_food}>
-          Add Food +
-        </Link>
-        <FoodsNotFound />
-        {foods &&
-          foods.map((food) => (
-            <div key={food.id} className={classes.list_item}>
-              <img src={food.imageUrl} alt={food.name} />
-              <Link to={"/food/" + food.id}>{food.name}</Link>
-              <Price price={food.price} />
-              <div className={classes.actions}>
-                <Link to={"/admin/editFood/" + food.id}>Edit</Link>
-                <Link onClick={() => deleteFood(food)}>Delete</Link>
+    <>
+      <div className={classes.container}>
+        <div className={classes.list}>
+          <Title title="Manage Foods" margin="1rem auto" />
+          <Search
+            searchRoute="/admin/foods/"
+            defaultRoute="/admin/foods"
+            margin="1rem 0"
+            placeholder="Search Foods"
+          />
+          <Link to="/admin/addFood" className={classes.add_food}>
+            Add Food +
+          </Link>
+          <FoodsNotFound />
+          {foods &&
+            foods.map((food) => (
+              <div key={food.id} className={classes.list_item}>
+                <img src={food.imageUrl} alt={food.name} />
+                <Link to={"/food/" + food.id}>{food.name}</Link>
+                <Price price={food.price} />
+                <div className={classes.actions}>
+                  <Link onClick={() => handleFoodView(food)}>View</Link>
+                  <Link to={"/admin/editFood/" + food.id}>Edit</Link>
+                  <Link onClick={() => deleteFood(food)}>Delete</Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
-    </div>
+      {selectedFood && (
+        <Dialog
+          header={selectedFood.name}
+          visible={visible}
+          style={{ width: "25vw" }}
+          onHide={() => {
+            if (!visible) return;
+            setVisible(false);
+          }}
+        >
+          <>
+            <p>
+              <b>Price:</b> {selectedFood.price}
+            </p>
+            <p>
+              <b>Cook Time:</b> {selectedFood.cookTime}
+            </p>
+            <p className="flex">
+              <b>Stars:</b> <StarRating stars={selectedFood.stars} size={25} />
+            </p>
+          </>
+        </Dialog>
+      )}
+    </>
   );
 }
