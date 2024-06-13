@@ -1,6 +1,10 @@
 {
     "compilerOptions": {
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["./*"]
+      }
     },
     "include": ["src", "../backend/src/data.js"]
 }

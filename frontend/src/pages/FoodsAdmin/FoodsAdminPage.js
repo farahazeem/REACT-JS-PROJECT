@@ -9,6 +9,17 @@ import Price from "../../components/Price/Price";
 import { toast } from "react-toastify";
 import { Dialog } from "primereact/dialog";
 import StarRating from "../../components/StarRating/StarRating";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../../components/ui/alert-dialog";
 
 export default function FoodsAdminPage() {
   const [foods, setFoods] = useState([]);
@@ -36,8 +47,9 @@ export default function FoodsAdminPage() {
   };
 
   const deleteFood = async (food) => {
-    const confirmed = window.confirm(`Delete Food ${food.name}?`);
-    if (!confirmed) return;
+    //I replaced it with shadCn alert dialog
+    // const confirmed = window.confirm(`Delete Food ${food.name}?`);
+    // if (!confirmed) return;
 
     await deleteById(food.id);
     toast.success("Food item has been deleted");
@@ -74,7 +86,29 @@ export default function FoodsAdminPage() {
                 <div className={classes.actions}>
                   <Link onClick={() => handleFoodView(food)}>View</Link>
                   <Link to={"/admin/editFood/" + food.id}>Edit</Link>
-                  <Link onClick={() => deleteFood(food)}>Delete</Link>
+                  {/* <Link onClick={() => deleteFood(food)}>Delete</Link> */}
+                  <AlertDialog>
+                    <AlertDialogTrigger style={{ color: "darkblue" }}>
+                      Delete
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Are you sure you want to delete this item?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently
+                          delete the item.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => deleteFood(food)}>
+                          Continue
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>
               </div>
             ))}
