@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from "./registerPage.module.css";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -7,6 +7,8 @@ import Title from "../../components/Title/Title";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { EMAIL } from "../../constants/patterns";
+import ReCAPTCHA from "react-google-recaptcha";
+const GOOGLE_RECAPTCHA_SITE_KEY = "6LcOnRIqAAAAAJzZ8onKXdRnI25QZknk4w52hr7w";
 
 export default function RegisterPage() {
   const {
@@ -21,6 +23,7 @@ export default function RegisterPage() {
   const [params] = useSearchParams();
   const returnUrl = params.get("returnUrl");
   const auth = useAuth();
+  const captchaRef = useRef(null);
 
   useEffect(() => {
     if (!user) return;
@@ -28,7 +31,9 @@ export default function RegisterPage() {
   }, [user]);
 
   const submit = async (data) => {
-    await auth.register(data);
+    const token = captchaRef.current.getValue();
+    await auth.register({ ...data, token });
+    captchaRef.current.reset();
   };
 
   return (
@@ -84,6 +89,9 @@ export default function RegisterPage() {
             })}
             error={errors.address}
           />
+          <div className={classes.login}>
+            <ReCAPTCHA sitekey={GOOGLE_RECAPTCHA_SITE_KEY} ref={captchaRef} />
+          </div>
           <Button type="submit" text="Register" />
           <div className={classes.login}>
             Already a user? &nbsp;
