@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Price from "../../components/Price/Price";
 import StarRating from "../../components/StarRating/StarRating";
@@ -7,20 +7,36 @@ import { useCart } from "../../hooks/useCart";
 import { getById } from "../../services/foodService";
 import classes from "./foodPage.module.css";
 import NotFound from "../../components/NotFound/NotFound";
+import { useQuery } from "react-query";
+
 export default function FoodPage() {
-  const [food, setFood] = useState({});
   const { id } = useParams();
   const { addToCart } = useCart();
   const navigate = useNavigate();
+  const {
+    isLoading,
+    error,
+    data: food,
+  } = useQuery(["food", id], () => getById(id)); //useQuery() explained in details below
+
+  //The first argument to useQuery is a query key.
+  //This key uniquely identifies the query and helps React Query to manage and cache the results.
+  //In this case, the key is an array consisting of the string "food" and the id. i.e. ["food", id]
+  //By including the id in the key, you ensure that each food item is cached separately.
+
+  //The second argument is a query function.
+  //This is the function that React Query will call to fetch the data.
+  //In this case, it's an anonymous arrow function that calls getById(id).
+  //This function is expected to return a promise that resolves to the data you want to fetch.
 
   const handleAddToCart = () => {
     addToCart(food);
     navigate("/cart");
   };
 
-  useEffect(() => {
-    getById(id).then(setFood);
-  }, [id]);
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>An error has occurred: {error.message}</p>;
+
   return (
     <>
       {!food ? (
