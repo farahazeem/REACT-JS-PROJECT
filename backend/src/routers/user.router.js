@@ -6,6 +6,7 @@ import { UserModel } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import auth from "../middleware/auth.mid.js";
 import admin from "../middleware/admin.mid.js";
+import axios from "axios";
 const PASSWORD_HASH_SALT_ROUNDS = 10;
 
 const router = Router();
@@ -64,8 +65,15 @@ router.post(
 router.post(
   "/register",
   handler(async (req, res) => {
-    const { name, email, password, address } = req.body;
+    const { name, email, password, address, token } = req.body;
     const user = await UserModel.findOne({ email });
+    const isHuman = await verifyRecaptchaToken(token);
+
+    if (!isHuman) {
+      return res
+        .status(400)
+        .send("reCAPTCHA verification failed. Please try again.");
+    }
 
     if (user) {
       req.status(BAD_REQUEST).send("User already exists, please login!");
@@ -175,5 +183,23 @@ const generateTokenResponse = (user) => {
     token,
   };
 };
+
+// Function to verify Google reCAPTCHA token
+async function verifyRecaptchaToken(token) {
+  try {
+    const response = await axios.post(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.GOOGLE_RECAPTCHA_SECRET_KEY}&response=${token}`
+    );
+
+    if (response.data.success) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error verifying reCAPTCHA:", error);
+    return false;
+  }
+}
 
 export default router;

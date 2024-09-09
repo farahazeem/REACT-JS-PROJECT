@@ -9,6 +9,7 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { uploadImage } from "../../services/uploadService";
 import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "react-query";
 
 export default function FoodEditPage() {
   const { foodId } = useParams();
@@ -16,6 +17,11 @@ export default function FoodEditPage() {
   const isEditMode = !!foodId; //!! sign converts everything as the presentation of boolean e.g. '' == false, 'AnyString' == true
   // 0 == false, any other number == true
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  // Mutation for adding a new food item
+  const addMutation = useMutation(add);
+  // Mutation for updating an existing food item
+  const updateMutation = useMutation(update);
 
   const {
     handleSubmit,
@@ -37,14 +43,23 @@ export default function FoodEditPage() {
   const submit = async (foodData) => {
     const food = { ...foodData, imageUrl };
     if (isEditMode) {
-      await update(food);
-      toast.success(`Food "${food.name}" updated successfully`);
-      return;
+      try {
+        await updateMutation.mutateAsync(food);
+        toast.success(`Food "${food.name}" updated successfully`);
+        queryClient.invalidateQueries(["food", foodId]);
+      } catch (error) {
+        toast.error(`Failed to update food: ${error.message}`);
+      }
+    } else {
+      try {
+        const newFood = await addMutation.mutateAsync(food);
+        toast.success(`Food "${newFood.name}" has been added successfully`);
+        queryClient.invalidateQueries("foods");
+        navigate("/admin/editFood/" + newFood.id, { replace: true });
+      } catch (error) {
+        toast.error(`Failed to add food: ${error.message}`);
+      }
     }
-
-    const newFood = await add(food);
-    toast.success(`Food "${newFood.name} has been added successfully"`);
-    navigate("/admin/editFood/" + newFood.id, { replace: true });
   };
 
   const upload = async (event) => {

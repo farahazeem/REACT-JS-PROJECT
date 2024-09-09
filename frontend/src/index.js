@@ -12,33 +12,37 @@ import "react-toastify/dist/ReactToastify.css";
 import { LoadingProvider } from "./hooks/useLoading";
 import "./interceptors/authInterceptor";
 import { PrimeReactProvider } from "primereact/api";
+import { QueryClient, QueryClientProvider } from "react-query";
 
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <LoadingProvider>
-        <AuthProvider>
-          <CartProvider>
-            <PrimeReactProvider>
-              <App />
-              <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-              />
-            </PrimeReactProvider>
-          </CartProvider>
-        </AuthProvider>
-      </LoadingProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <LoadingProvider>
+          <AuthProvider>
+            <CartProvider>
+              <PrimeReactProvider>
+                <App />
+                <ToastContainer
+                  position="bottom-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
+              </PrimeReactProvider>
+            </CartProvider>
+          </AuthProvider>
+        </LoadingProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
