@@ -64,3 +64,8 @@
     padding: 0.1rem 0.45rem;
     font-size: 0.9rem;
 }
+
+.mat_icons {
+    font: small;
+    margin-right: 2px;
+}

@@ -3,6 +3,10 @@ import classes from "./header.module.css";
 import { Link } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { useAuth } from "../../hooks/useAuth";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { LocalShipping } from "@mui/icons-material";
 
 export default function Header() {
   const { user, logout } = useAuth();
@@ -23,13 +27,27 @@ export default function Header() {
         </Link>
         <nav>
           <ul>
+            <li className="flex">
+              <a>
+                <NotificationsNoneIcon />
+              </a>
+            </li>
             {user ? (
               <li className={classes.menu_container}>
                 <Link to="/dashboard">{user.name}</Link>
                 <div className={classes.menu}>
-                  <Link to="/profile">Profile</Link>
-                  <Link to="/orders">Orders</Link>
-                  <a onClick={logout}>Log out</a>
+                  <Link to="/profile">
+                    <AccountCircleIcon sx={{ mr: 1 }} />
+                    Profile
+                  </Link>
+                  <Link to="/orders">
+                    <LocalShipping sx={{ mr: 1 }} />
+                    Orders
+                  </Link>
+                  <a onClick={logout}>
+                    <LogoutIcon sx={{ mr: 1 }} />
+                    Log out
+                  </a>
                 </div>
               </li>
             ) : (
