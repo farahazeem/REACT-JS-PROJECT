@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import classes from "./header.module.css";
 import { Link } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
@@ -7,10 +7,25 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { LocalShipping } from "@mui/icons-material";
+import { OverlayPanel } from "primereact/overlaypanel";
+import { VirtualScroller } from "primereact/virtualscroller";
 
 export default function Header() {
   const { user, logout } = useAuth();
   const { cart } = useCart();
+  const overlayPanelRef = useRef(null);
+  const items = Array.from({ length: 100000 }).map((_, i) => ({
+    label: `Someone liked Food item #${i}`,
+    value: i,
+  }));
+
+  const handleIconClick = (event) => {
+    overlayPanelRef.current.toggle(event);
+  };
+
+  const itemTemplate = (item) => {
+    return <div className="p-2">{item.label}</div>;
+  };
 
   return (
     <header className={classes.header}>
@@ -28,9 +43,20 @@ export default function Header() {
         <nav>
           <ul>
             <li className="flex">
-              <a>
+              <a onClick={handleIconClick} style={{ cursor: "pointer" }}>
                 <NotificationsNoneIcon />
               </a>
+              <OverlayPanel ref={overlayPanelRef} style={{ width: "300px" }}>
+                <VirtualScroller
+                  items={items}
+                  itemSize={38}
+                  itemTemplate={itemTemplate}
+                  lazy
+                  className={classes.hide_scrollbar}
+                  style={{ height: "300px" }} // Height to constrain the VirtualScroller
+                  onScrollIndexChange={(e) => console.log(e.first)} // For lazy loading
+                />
+              </OverlayPanel>
             </li>
             {user ? (
               <li className={classes.menu_container}>

@@ -69,3 +69,15 @@
     font: small;
     margin-right: 2px;
 }
+
+/* Css to hide the scrollbar from UI */
+.hide-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  
+  .hide_scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
