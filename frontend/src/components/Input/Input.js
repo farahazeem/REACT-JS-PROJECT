@@ -19,9 +19,11 @@ function Input(
         return "*";
     }
   };
+  const id = `input-${label.toLowerCase().replace(/\s+/g, "-")}`;
   return (
-    <InputContainer label={label}>
+    <InputContainer label={label} id={id}>
       <input
+        id={id}
         defaultValue={defaultValue}
         className={classes.input}
         type={type}

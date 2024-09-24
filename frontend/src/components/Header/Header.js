@@ -43,15 +43,22 @@ export default function Header() {
         <nav>
           <ul>
             <li className="flex">
-              <a onClick={handleIconClick} style={{ cursor: "pointer" }}>
+              <button
+                onClick={handleIconClick}
+                style={{
+                  cursor: "pointer",
+                  color: "#af1313",
+                }}
+              >
                 <NotificationsNoneIcon />
-              </a>
+              </button>
               <OverlayPanel ref={overlayPanelRef} style={{ width: "300px" }}>
                 <VirtualScroller
                   items={items}
                   itemSize={38}
                   itemTemplate={itemTemplate}
                   lazy
+                  data-testid="notifications-panel"
                   className={classes.hide_scrollbar}
                   style={{ height: "300px" }} // Height to constrain the VirtualScroller
                   onScrollIndexChange={(e) => console.log(e.first)} // For lazy loading

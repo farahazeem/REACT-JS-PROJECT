@@ -20,8 +20,10 @@ export default function RegisterPage() {
 
   const navigate = useNavigate();
   const { user } = useAuth();
-  const [params] = useSearchParams();
-  const returnUrl = params.get("returnUrl");
+  // const [params] = useSearchParams();
+  // console.log(params);
+  // const returnUrl = params.get("returnUrl") || "";
+  const returnUrl = "/";
   const auth = useAuth();
   const captchaRef = useRef(null);
 
@@ -40,9 +42,9 @@ export default function RegisterPage() {
     <div className={classes.container}>
       <div className={classes.details}>
         <Title title="Register" />
-        <form onSubmit={handleSubmit(submit)} noValidate>
+        <form aria-label="form" onSubmit={handleSubmit(submit)} noValidate>
           <Input
-            type="name"
+            type="text"
             label="Name"
             {...register("name", {
               required: true,
@@ -90,7 +92,11 @@ export default function RegisterPage() {
             error={errors.address}
           />
           <div className={classes.login}>
-            <ReCAPTCHA sitekey={GOOGLE_RECAPTCHA_SITE_KEY} ref={captchaRef} />
+            <ReCAPTCHA
+              data-testid="recaptcha"
+              sitekey={GOOGLE_RECAPTCHA_SITE_KEY}
+              ref={captchaRef}
+            />
           </div>
           <Button type="submit" text="Register" />
           <div className={classes.login}>
