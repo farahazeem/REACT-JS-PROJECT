@@ -5,9 +5,9 @@ import StarRating from "../../components/StarRating/StarRating";
 import Tags from "../../components/Tags/Tags";
 import { useCart } from "../../hooks/useCart";
 import { getById } from "../../services/foodService";
-import classes from "./foodPage.module.css";
 import NotFound from "../../components/NotFound/NotFound";
 import { useQuery } from "react-query";
+import { styled } from "styled-components";
 
 export default function FoodPage() {
   const { id } = useParams();
@@ -37,61 +37,163 @@ export default function FoodPage() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>An error has occurred: {error.message}</p>;
 
+  //Styles using Styled Components
+  const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 3rem;
+
+    & > * {
+      min-width: 25rem;
+      max-width: 40rem;
+    }
+  `;
+
+  const Image = styled.img`
+    border-radius: 3rem;
+    flex: 1 0;
+    object-fit: cover;
+    height: 35rem;
+    margin: 1rem;
+  `;
+
+  const Details = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    border-radius: 3rem;
+    padding: 2rem;
+    color: black;
+    margin-left: 1rem;
+  `;
+
+  const Header = styled.div`
+    display: flex;
+    justify-content: space-between;
+  `;
+
+  const Name = styled.span`
+    font-size: 2rem;
+    font-weight: bold;
+  `;
+
+  const Favourite = styled.span`
+    color: var(--primary-red);
+    font-size: 2.5rem;
+
+    &.not {
+      color: grey;
+    }
+  `;
+
+  const Origins = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.7rem 0;
+
+    span {
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      margin: 0.5rem 0.5rem 0 0;
+      border-radius: 2rem;
+      background-color: aliceblue;
+    }
+  `;
+
+  const Rating = styled.div`
+    margin-top: 1rem;
+  `;
+
+  //can't name it Tags because it's already a component
+  const TagsContainer = styled.div`
+    margin: 1rem 0;
+  `;
+
+  const CookTime = styled.div`
+    margin-top: 1rem;
+
+    span {
+      padding: 0.6rem 2rem 0.6rem 0;
+      border-radius: 10rem;
+      font-size: 1.3rem;
+    }
+  `;
+
+  //can't name it Price because it's already a component
+  const PriceContainer = styled.div`
+    font-size: 1.8rem;
+    margin: 2rem 2rem 2rem 0;
+    color: green;
+
+    &:before {
+      content: "Price: ";
+      color: darkgrey;
+    }
+  `;
+
+  const Button = styled.button`
+    color: white;
+    background-color: var(--primary-red);
+    border: none;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 10rem;
+    outline: none;
+
+    &:hover {
+      opacity: 0.9;
+      cursor: pointer;
+    }
+  `;
+
   return (
     <>
       {!food ? (
         <NotFound message="Food Not Found!" linkText="Back To Homepage" />
       ) : (
-        <div className={classes.container}>
-          <img
-            className={classes.image}
-            src={`${food.imageUrl}`}
-            alt={food.name}
-          />
+        <Container>
+          <Image src={`${food.imageUrl}`} alt={food.name} />
 
-          <div className={classes.details}>
-            <div className={classes.header}>
-              <span className={classes.name}>{food.name}</span>
-              <span
-                className={`${classes.favorite} ${
-                  food.favorite ? "" : classes.not
-                }`}
-              >
-                ❤
-              </span>
-            </div>
-            <div className={classes.rating}>
+          <Details>
+            <Header>
+              <Name>{food.name}</Name>
+              <Favourite className={food.favorite ? "" : "not"}>❤</Favourite>
+            </Header>
+            <Rating>
               <StarRating stars={food.stars} size={25} />
-            </div>
+            </Rating>
 
-            <div className={classes.origins}>
+            <Origins>
               {food.origins?.map((origin) => (
                 <span key={origin}>{origin}</span>
               ))}
-            </div>
+            </Origins>
 
-            <div className={classes.tags}>
+            <TagsContainer>
               {food.tags && (
                 <Tags
                   tags={food.tags.map((tag) => ({ name: tag }))}
                   forFoodPage={true}
                 />
               )}
-            </div>
+            </TagsContainer>
 
-            <div className={classes.cook_time}>
+            <CookTime>
               <span>
                 Time to cook about <strong>{food.cookTime}</strong> minutes
               </span>
-            </div>
+            </CookTime>
 
-            <div className={classes.price}>
+            <PriceContainer>
               <Price price={food.price} />
-            </div>
+            </PriceContainer>
 
-            <button onClick={handleAddToCart}>Add To Cart</button>
-          </div>
-        </div>
+            <Button onClick={handleAddToCart}>Add To Cart</Button>
+          </Details>
+        </Container>
       )}
     </>
   );
