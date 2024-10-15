@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 Search.defaultProps = {
   searchRoute: "/search/",
   defaultRoute: "/",
-  placeholder: "Search Food Mine!",
+  placeholder: "Search Scrumptious..",
 };
 
 export default function Search({

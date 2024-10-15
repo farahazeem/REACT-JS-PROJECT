@@ -5,7 +5,7 @@
 }
 
 .header a {
-    color: #af1313;
+    color: #0370b9;
 }
 
 .header a:hover {
@@ -22,6 +22,7 @@
 
 .logo {
     font-weight: bold;
+    font-size: x-large;
     padding: 1rem;
   }
   

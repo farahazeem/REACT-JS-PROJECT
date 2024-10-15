@@ -67,7 +67,7 @@ export default function UserEditPage() {
             {...register("isAdmin")}
             //won't show any errors since it doesnt have any validations
           />
-          <Button type="submit" />
+          <Button type="submit" backgroundColor="#0370b9" />
         </form>
       </div>
     </div>

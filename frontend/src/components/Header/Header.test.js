@@ -42,7 +42,7 @@ describe("Header Component", () => {
       </Router>
     );
 
-    expect(screen.getByText("Food Mine!")).toBeInTheDocument();
+    expect(screen.getByText("Scrumptious..")).toBeInTheDocument();
     expect(screen.getByText("Login")).toBeInTheDocument();
     expect(screen.getByText("Cart")).toBeInTheDocument();
   });

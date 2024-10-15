@@ -11,7 +11,7 @@
     flex-direction: column;
     flex: 3 0;
     justify-content: space-evenly;
-    border: 1px solid #ffbbbb;
+    border: 1px solid #a4d6f8;
     border-radius: 1rem;
     list-style-type: none;
     margin: 0.5rem;
@@ -75,7 +75,7 @@
     align-items: center;
     flex: 1 3;
     height: 20rem;
-    border: 1px solid #ffbbbb;
+    border: 1px solid #a4d6f8;
     border-radius: 1rem;
     padding: 0.5rem;
     margin: 0.5rem;

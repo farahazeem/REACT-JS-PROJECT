@@ -19,11 +19,11 @@
   }
   
   .container img {
-    border-bottom: 10px solid brown;
+    border-bottom: 10px solid #0370b9;
   }
   
   .container h1 {
-    color: brown;
+    color: #0370b9;
     margin-top: 1rem;
   }
   

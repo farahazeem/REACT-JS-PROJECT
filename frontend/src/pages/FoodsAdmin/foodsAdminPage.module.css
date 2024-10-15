@@ -12,7 +12,7 @@
   
   a.add_food {
     display: inline-block;
-    background: darkred;
+    background: #0370b9;
     color: white;
     padding: 0.7rem;
     margin: 0.8rem 0;
@@ -45,6 +45,6 @@
   
   .actions > a {
     margin-right: 1rem;
-    color: darkblue;
+    color: #0370b9;
     cursor: pointer;
   }

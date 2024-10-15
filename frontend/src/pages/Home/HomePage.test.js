@@ -79,7 +79,7 @@ describe("HomePage", () => {
     );
     //search bar is rendered
     expect(
-      screen.getByPlaceholderText(/Search Food Mine!/i)
+      screen.getByPlaceholderText(/Search Scrumptious../i)
     ).toBeInTheDocument();
 
     //tags are rendered

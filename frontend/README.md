@@ -13,7 +13,7 @@ Tech set we used for this project:
 ⦁ Mongodb,
 ⦁ Paypal Integration,
 ⦁ Mailgun for email features,
-⦁ Render.com to deploy your project on the internet.
+⦁ Cloudinary for storing/managing images,
 
 # Lessons:
 

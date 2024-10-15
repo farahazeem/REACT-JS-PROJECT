@@ -19,7 +19,7 @@ export default function Dashboard() {
                 color: item.color,
               }}
             >
-              <img src={item.imageUrl} alt={item.title} />
+              <img src={item.imageUrl} alt={item.title} color="white" />
               <h2 style={{ color: "white" }}>{item.title}</h2>
             </Link>
           ))}
@@ -33,14 +33,14 @@ const allItems = [
     title: "Orders",
     imageUrl: "/icons/orders.svg",
     url: "/orders",
-    bgColor: "#ec407a",
+    bgColor: "#0370b9",
     color: "white",
   },
   {
     title: "Profile",
     imageUrl: "/icons/profile.svg",
     url: "/profile",
-    bgColor: "#1565c0",
+    bgColor: "#0370b9",
     color: "white",
   },
   {
@@ -48,7 +48,7 @@ const allItems = [
     imageUrl: "/icons/users.svg",
     url: "/admin/users",
     forAdmin: true,
-    bgColor: "#00bfa5",
+    bgColor: "#0370b9",
     color: "white",
   },
   {
@@ -56,7 +56,7 @@ const allItems = [
     imageUrl: "/icons/foods.svg",
     url: "/admin/foods",
     forAdmin: true,
-    bgColor: "#e040fb",
+    bgColor: "#0370b9",
     color: "white",
   },
 ];

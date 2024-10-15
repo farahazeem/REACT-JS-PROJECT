@@ -47,6 +47,7 @@ export default function FoodEditPage() {
         await updateMutation.mutateAsync(food);
         toast.success(`Food "${food.name}" updated successfully`);
         queryClient.invalidateQueries(["food", foodId]);
+        navigate("/");
       } catch (error) {
         toast.error(`Failed to update food: ${error.message}`);
       }
@@ -55,7 +56,8 @@ export default function FoodEditPage() {
         const newFood = await addMutation.mutateAsync(food);
         toast.success(`Food "${newFood.name}" has been added successfully`);
         queryClient.invalidateQueries("foods");
-        navigate("/admin/editFood/" + newFood.id, { replace: true });
+        //navigate("/admin/editFood/" + newFood.id, { replace: true });
+        navigate("/");
       } catch (error) {
         toast.error(`Failed to add food: ${error.message}`);
       }

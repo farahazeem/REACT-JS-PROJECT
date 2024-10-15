@@ -88,7 +88,7 @@ export default function FoodsAdminPage() {
                   <Link to={"/admin/editFood/" + food.id}>Edit</Link>
                   {/* <Link onClick={() => deleteFood(food)}>Delete</Link> */}
                   <AlertDialog>
-                    <AlertDialogTrigger style={{ color: "darkblue" }}>
+                    <AlertDialogTrigger style={{ color: "#0370b9" }}>
                       Delete
                     </AlertDialogTrigger>
                     <AlertDialogContent>

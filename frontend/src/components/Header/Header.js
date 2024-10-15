@@ -38,7 +38,7 @@ export default function Header() {
             margin: 0 auto;
         } */}
         <Link to={"/"} className={classes.logo}>
-          Food Mine!
+          Scrumptious..
         </Link>
         <nav>
           <ul>
@@ -47,7 +47,7 @@ export default function Header() {
                 onClick={handleIconClick}
                 style={{
                   cursor: "pointer",
-                  color: "#af1313",
+                  color: "#0370b9",
                 }}
               >
                 <NotificationsNoneIcon />

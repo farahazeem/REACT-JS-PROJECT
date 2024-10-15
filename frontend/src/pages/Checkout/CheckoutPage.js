@@ -73,6 +73,7 @@ export default function CheckoutPage() {
               text="Go To Payment"
               width="100%"
               height="3rem"
+              backgroundColor="#0370b9"
             />
           </div>
         </div>

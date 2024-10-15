@@ -52,7 +52,7 @@ export default function LoginPage() {
             error={errors.password}
           />
 
-          <Button type="submit" text="Login" />
+          <Button type="submit" text="Login" backgroundColor="#0370b9" />
           <div className={classes.register}>
             New user? &nbsp;
             <Link to={`/register${returnUrl ? "?returnUrl=" + returnUrl : ""}`}>
