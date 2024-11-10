@@ -49,6 +49,10 @@ export default function RegisterPage() {
             {...register("name", {
               required: true,
               minLength: 5,
+              pattern: {
+                value: /^[A-Za-z\s]+$/, // Regex to allow only alphabetic characters and spaces
+                message: "Name must contain only alphabetic characters.", // Custom error message
+              },
             })}
             error={errors.name}
           />
