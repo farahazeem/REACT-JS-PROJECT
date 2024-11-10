@@ -1,0 +1,27 @@
+  .chatbotHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-red);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .chatbotHeader h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .chatbotHeader button {
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
