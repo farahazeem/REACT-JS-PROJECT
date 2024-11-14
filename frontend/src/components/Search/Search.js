@@ -2,17 +2,11 @@ import React, { useEffect, useState } from "react";
 import classes from "./search.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 
-Search.defaultProps = {
-  searchRoute: "/search/",
-  defaultRoute: "/",
-  placeholder: "Search Scrumptious..",
-};
-
 export default function Search({
-  searchRoute,
-  defaultRoute,
+  searchRoute = "/search/",
+  defaultRoute = "/",
   margin,
-  placeholder,
+  placeholder = "Search Scrumptious..",
 }) {
   const [term, setTerm] = useState("");
   const navigate = useNavigate();
