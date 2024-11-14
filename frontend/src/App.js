@@ -27,7 +27,7 @@ function App() {
       <Loading />
       <Header />
       <AppRoutes />
-      <button class="open-button" onClick={handleOpen}>
+      <button className="open-button" onClick={handleOpen}>
         ChatBot
       </button>
       {openChat && (
