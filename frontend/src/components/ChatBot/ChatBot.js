@@ -54,7 +54,7 @@ export default function ChatBot({ closeChat }) {
     });
 
     const apiRequestBody = {
-      model: "gpt-3.5-turbo",
+      model: "ft:gpt-3.5-turbo-0125:software-developer::ATgUdTfR", //fine tunned model id got by running createFineTuneModel() function (backend: fineTuneModel.js file) //note: its the model Id (we get after successful fine tunning) not the job id
       messages: [systemMessage, ...apiMessages],
     };
 
